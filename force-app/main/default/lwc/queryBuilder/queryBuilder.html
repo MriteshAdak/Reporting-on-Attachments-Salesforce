@@ -12,6 +12,7 @@
       >
       </lightning-combobox>
 
+      <!-- Using message-when-value-missing attribute -->
       <lightning-dual-listbox
         name="fields"
         label="Select Fields"
@@ -23,19 +24,21 @@
         onchange={handleFieldChange}
         required
         class="slds-var-m-top_small"
+        message-when-value-missing="At least one field must be selected"
         disabled={isLoading}
       >
       </lightning-dual-listbox>
 
       <div class="slds-var-m-top_medium">
-        <template if:true={formErrorMessage}>
+        <!-- TODO: Delete and replace with "message-when-value-missing" attribute and inline field level validation for each field-->
+        <!-- <template if:true={formErrorMessage}>
           <div
             class="slds-text-color_error slds-var-m-bottom_small"
             role="alert"
           >
             {formErrorMessage}
           </div>
-        </template>
+        </template> -->
 
         <div class="slds-grid">
           <div class="slds-var-m-top_small slds-text-color_weak">

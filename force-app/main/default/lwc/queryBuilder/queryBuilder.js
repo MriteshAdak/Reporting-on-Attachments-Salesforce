@@ -27,14 +27,14 @@ export default class QueryBuilder extends LightningElement {
   objectOptions = OBJECT_OPTIONS;
   operatorOptions = OPERATOR_OPTIONS;
 
-  // State
+  // Initial state
   selectedObject = "Attachment";
   selectedFields = [];
   filters = [];
   limitValue = 50;
   fieldOptions = [];
   isLoading = false;
-  formErrorMessage = "";
+  formErrorMessage = ""; // TODO: Remove this error message reference and rely solely on inline validation and toast messages for feedback.
 
   // --- Lifecycle ---
   connectedCallback() {
@@ -70,7 +70,7 @@ export default class QueryBuilder extends LightningElement {
   // --- User Actions ---
   handleObjectChange(event) {
     this.selectedObject = event.detail.value;
-    this.formErrorMessage = "";
+    this.formErrorMessage = ""; // TODO: Remove this error message reference and rely solely on inline validation and toast messages for feedback.
     this.applyControlValidity(event.target, "");
     this.fetchFields();
   }
@@ -78,14 +78,14 @@ export default class QueryBuilder extends LightningElement {
   handleFieldChange(event) {
     // event.detail.value contains API names (value property)
     this.selectedFields = event.detail.value;
-    this.formErrorMessage = "";
+    this.formErrorMessage = ""; // TODO: Remove this error message reference and rely solely on inline validation and toast messages for feedback.
     this.applyControlValidity(event.target, "");
   }
 
   handleAddFilter() {
     // Delegate logic to Utility
     this.filters = [...this.filters, this.decorateFilter(createNewFilter())];
-    this.formErrorMessage = "";
+    this.formErrorMessage = ""; // TODO: Remove this error message reference and rely solely on inline validation and toast messages for feedback.
   }
 
   handleFilterChange(event) {
@@ -128,7 +128,7 @@ export default class QueryBuilder extends LightningElement {
     }
 
     updated = this.decorateFilter(updated);
-    this.formErrorMessage = "";
+    this.formErrorMessage = ""; // TODO: Remove this error message reference and rely solely on inline validation and toast messages for feedback.
     this.applyControlValidity(event.target, "");
 
     this.filters = [
@@ -141,7 +141,7 @@ export default class QueryBuilder extends LightningElement {
   handleRemoveFilter(event) {
     const id = parseInt(event.currentTarget.dataset.id, 10);
     this.filters = this.filters.filter((f) => f.id !== id);
-    this.formErrorMessage = "";
+    this.formErrorMessage = ""; // TODO: Remove this error message reference and rely solely on inline validation and toast messages for feedback.
   }
 
   handleLimitChange(event) {
@@ -168,7 +168,7 @@ export default class QueryBuilder extends LightningElement {
       valueErrorMessage: ""
     });
 
-    this.formErrorMessage = "";
+    this.formErrorMessage = ""; // TODO: Remove this error message reference and rely solely on inline validation and toast messages for feedback.
     this.applyControlValidity(event.target, "");
 
     this.filters = [
@@ -215,7 +215,7 @@ export default class QueryBuilder extends LightningElement {
       valueErrorMessage: ""
     });
 
-    this.formErrorMessage = "";
+    this.formErrorMessage = ""; // TODO: Remove this error message reference and rely solely on inline validation and toast messages for feedback.
     this.applyControlValidity(event.currentTarget, "");
 
     this.filters = [
@@ -248,7 +248,7 @@ export default class QueryBuilder extends LightningElement {
       valueErrorMessage: ""
     });
 
-    this.formErrorMessage = "";
+    this.formErrorMessage = ""; // TODO: Remove this error message reference and rely solely on inline validation and toast messages for feedback.
 
     this.filters = [
       ...this.filters.slice(0, idx),
@@ -347,7 +347,7 @@ export default class QueryBuilder extends LightningElement {
     const fieldErrors = validation?.fieldErrors || {};
     const filterErrors = fieldErrors.filters || {};
 
-    this.formErrorMessage = validation?.formErrorMessage || "";
+    this.formErrorMessage = validation?.formErrorMessage || ""; // TODO: Remove this error message reference and rely solely on inline validation and toast messages for feedback.
 
     this.applyControlValidity(
       this.template.querySelector('[data-control="object-selector"]'),
